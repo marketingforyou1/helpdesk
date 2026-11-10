@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  AGENT
+}
+
+enum TicketStatus {
+  NEW
+  OPEN
+  WAITING
+  RESOLVED
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum Channel {
+  EMAIL
+  CHAT
+  PHONE
+  FACEBOOK
+  WHATSAPP
+  INSTAGRAM
+}
+
+enum MessageDirection {
+  IN
+  OUT
+}
+
+enum MessageKind {
+  PUBLIC
+  NOTE
+  SYSTEM
+}
+
+enum MailboxType {
+  IMAP
+  GMAIL
+  M365
+  FORWARD
+}
+
+model Workspace {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  users     User[]
+  teams     Team[]
+  customers Customer[]
+  tickets   Ticket[]
+  mailboxes Mailbox[]
+  counter   Int        @default(10000)
+}
+
+model User {
+  id           String    @id @default(cuid())
+  workspaceId  String
+  workspace    Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         Role      @default(AGENT)
+  teams        Team[]    @relation("TeamMembers")
+  assigned     Ticket[]  @relation("Assignee")
+  messages     Message[]
+  createdAt    DateTime  @default(now())
+}
+
+model Team {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name        String
+  members     User[]    @relation("TeamMembers")
+  tickets     Ticket[]
+  mailboxes   Mailbox[]
+
+  @@unique([workspaceId, name])
+}
+
+model Customer {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name        String
+  email       String?
+  phone       String?
+  company     String?
+  tags        String[]
+  tickets     Ticket[]
+  createdAt   DateTime  @default(now())
+
+  @@unique([workspaceId, email])
+}
+
+model Ticket {
+  id              String       @id @default(cuid())
+  number          Int
+  workspaceId     String
+  workspace       Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  subject         String
+  status          TicketStatus @default(NEW)
+  priority        Priority     @default(NORMAL)
+  channel         Channel      @default(EMAIL)
+  tags            String[]
+  customerId      String
+  customer        Customer     @relation(fields: [customerId], references: [id])
+  teamId          String?
+  team            Team?        @relation(fields: [teamId], references: [id])
+  assigneeId      String?
+  assignee        User?        @relation("Assignee", fields: [assigneeId], references: [id])
+  mailboxId       String?
+  mailbox         Mailbox?     @relation(fields: [mailboxId], references: [id])
+  firstResponseDue DateTime?
+  firstRespondedAt DateTime?
+  messages        Message[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  lastActivityAt  DateTime     @default(now())
+
+  @@unique([workspaceId, number])
+  @@index([workspaceId, status])
+}
+
+model Message {
+  id          String           @id @default(cuid())
+  ticketId    String
+  ticket      Ticket           @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  direction   MessageDirection
+  kind        MessageKind      @default(PUBLIC)
+  authorId    String?
+  author      User?            @relation(fields: [authorId], references: [id])
+  fromName    String?
+  fromEmail   String?
+  bodyText    String
+  bodyHtml    String?
+  messageId   String?          @unique
+  inReplyTo   String?
+  references  String[]
+  attachments Json             @default("[]")
+  createdAt   DateTime         @default(now())
+}
+
+model Mailbox {
+  id            String       @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  address       String
+  displayName   String?
+  type          MailboxType
+  defaultTeamId String?
+  defaultTeam   Team?        @relation(fields: [defaultTeamId], references: [id])
+  /// AES-GCM encrypted JSON: { imap:{host,port,secure,user,pass}, smtp:{host,port,secure,user,pass} }
+  credentials   String?
+  inboundToken  String       @unique @default(cuid())
+  sendAck       Boolean      @default(true)
+  lastSyncAt    DateTime?
+  lastUid       Int          @default(0)
+  lastError     String?
+  filters       MailFilter[]
+  tickets       Ticket[]
+  createdAt     DateTime     @default(now())
+
+  @@unique([workspaceId, address])
+}
+
+model MailFilter {
+  id         String   @id @default(cuid())
+  mailboxId  String
+  mailbox    Mailbox  @relation(fields: [mailboxId], references: [id], onDelete: Cascade)
+  position   Int
+  enabled    Boolean  @default(true)
+  name       String
+  /// FilterCondition[] – all must match
+  conditions Json
+  /// FilterAction
+  action     Json
+  createdAt  DateTime @default(now())
+}
