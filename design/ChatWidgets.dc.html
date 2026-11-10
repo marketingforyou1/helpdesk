@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – chat widgety</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0B5F4F}a:hover{color:#063F34}
+button,select,input{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 1000px; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0E7C66"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="Calls.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="Automation.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Reports.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="Mailboxes.dc.html" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: stretch">
+    <aside aria-label="Nastavenia" style="flex: 1 1 220px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; padding: 20px 12px; display: flex; flex-direction: column; gap: 2px; box-sizing: border-box">
+      <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 10px 8px">Kanály</div>
+      <a href="Mailboxes.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">E-mailové schránky</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; background: #F3F4F6; color: #111827; text-decoration: none; font-size: 14px; font-weight: 700">Chat widgety</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Telefónne linky</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Sociálne siete</a>
+      <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 16px 10px 8px">Pracovný postup</div>
+      <a href="Automation.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Automatizačné pravidlá</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Tímy a agenti</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">SLA a pracovná doba</a>
+    </aside>
+
+    <main style="flex: 999 1 640px; min-width: 0; max-width: 100%; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em">Chat widgety</h1>
+          <p style="margin: 0; font-size: 14px; color: #4B5563">Každý web má vlastný widget, vzhľad aj tím, ktorému chaty chodia.</p>
+        </div>
+        <button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: #0E7C66; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">+ Nový widget</button>
+      </div>
+
+      <div role="tablist" aria-label="Weby" style="display: flex; flex-wrap: wrap; gap: 10px">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="{{t.style}}">
+            <span style="{{t.dot}}"></span>
+            <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px">
+              <span style="font-weight: 800; font-size: 14px; color: #111827">{{t.domain}}</span>
+              <span style="font-size: 12px; color: #4B5563">{{t.meta}}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+        <section aria-label="Vzhľad a správanie" style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 800">Vzhľad</h2>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 13px; font-weight: 700; color: #374151">Hlavná farba</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+              <sc-for list="{{swatches}}" as="s" hint-placeholder-count="6">
+                <button type="button" onClick="{{s.pick}}" aria-label="Farba {{s.hex}}" aria-pressed="{{s.pressed}}" style="{{s.style}}"></button>
+              </sc-for>
+              <label style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 10px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 13px; color: #374151">Vlastná
+                <input type="color" value="{{w.color}}" onChange="{{setColor}}" style="width: 32px; height: 28px; border: 0; padding: 0; background: transparent; cursor: pointer">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">{{w.color}}</span>
+              </label>
+            </div>
+          </div>
+
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #374151">Nadpis v okne chatu
+            <input type="text" value="{{w.greeting}}" onChange="{{setGreeting}}" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; font-weight: 500">
+          </label>
+
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 13px; font-weight: 700; color: #374151">Poloha</span>
+              <div style="display: flex; gap: 6px">
+                <sc-for list="{{positions}}" as="p" hint-placeholder-count="2">
+                  <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="{{p.style}}">{{p.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 13px; font-weight: 700; color: #374151">Tvar tlačidla</span>
+              <div style="display: flex; gap: 6px">
+                <sc-for list="{{shapes}}" as="p" hint-placeholder-count="2">
+                  <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="{{p.style}}">{{p.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 13px; font-weight: 700; color: #374151">Téma okna</span>
+            <div style="display: flex; gap: 6px">
+              <sc-for list="{{themes}}" as="p" hint-placeholder-count="2">
+                <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="{{p.style}}">{{p.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+            <span style="font-size: 14px; font-weight: 600; color: #111827">Zobrazovať fotky agentov</span>
+            <button type="button" role="switch" aria-checked="{{avChecked}}" aria-label="Zobrazovať fotky agentov" onClick="{{toggleAvatars}}" style="{{avSwitch}}"><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; display: block"></span></button>
+          </div>
+
+          <h2 style="margin: 8px 0 0; font-size: 17px; font-weight: 800">Správanie</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #374151">Chaty smerovať tímu<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 10px; font-size: 14px; color: #111827; background: #FFFFFF; font-weight: 500"><option>{{w.team}}</option><option>Prvá línia</option><option>B2B obchod</option></select></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #374151">Jazyk widgetu<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 10px; font-size: 14px; color: #111827; background: #FFFFFF; font-weight: 500"><option>{{w.lang}}</option><option>Slovenčina</option><option>Čeština</option><option>English</option></select></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #374151">Keď nikto nie je online<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 10px; font-size: 14px; color: #111827; background: #FFFFFF; font-weight: 500"><option>Zobraziť formulár → tiket</option><option>Skryť widget</option><option>Ponúknuť bázu znalostí</option></select></label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #374151">Proaktívna výzva<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 10px; font-size: 14px; color: #111827; background: #FFFFFF; font-weight: 500"><option>Po 30 s v košíku</option><option>Vypnutá</option><option>Po 60 s na stránke</option></select></label>
+          </div>
+        </section>
+
+        <section aria-label="Náhľad" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+            <h2 style="margin: 0; font-size: 17px; font-weight: 800">Náhľad na webe</h2>
+            <span style="font-size: 13px; color: #4B5563">Zmeny sa prejavia okamžite</span>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #D1D5DB; border-radius: 14px; overflow: hidden">
+            <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F3F4F6; border-bottom: 1px solid #E5E7EB">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #D1D5DB"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #D1D5DB"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #D1D5DB"></span>
+              <span style="flex: 1; margin-left: 8px; background: #FFFFFF; border-radius: 6px; padding: 5px 10px; font-size: 12px; color: #374151">https://{{w.domain}}</span>
+            </div>
+            <div style="position: relative; height: 560px; background: #FAFAFA; overflow: hidden">
+              <div aria-hidden="true" style="padding: 24px; display: flex; flex-direction: column; gap: 14px">
+                <div style="height: 22px; width: 40%; background: #E5E7EB; border-radius: 6px"></div>
+                <div style="height: 140px; background: #EEF0F2; border-radius: 10px"></div>
+                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+                  <div style="height: 90px; background: #EEF0F2; border-radius: 10px"></div><div style="height: 90px; background: #EEF0F2; border-radius: 10px"></div><div style="height: 90px; background: #EEF0F2; border-radius: 10px"></div>
+                </div>
+              </div>
+              <div style="{{winStyle}}">
+                <div style="{{headStyle}}">
+                  <sc-if value="{{w.avatars}}" hint-placeholder-val="{{ true }}">
+                    <div style="display: flex">
+                      <span style="width: 30px; height: 30px; border-radius: 50%; background: #FDE68A; color: #78350F; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.8)">ZK</span>
+                      <span style="width: 30px; height: 30px; border-radius: 50%; background: #BFDBFE; color: #1E3A8A; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.8); margin-left: -8px">MR</span>
+                    </div>
+                  </sc-if>
+                  <span style="font-size: 16px; font-weight: 800; line-height: 1.25">{{w.greeting}}</span>
+                  <span style="font-size: 12px; opacity: 0.9">Sme online · odpovedáme do 2 minút</span>
+                </div>
+                <div style="{{bodyStyle}}">
+                  <div style="{{agentBubble}}">Dobrý deň! S čím vám môžeme pomôcť?</div>
+                  <div style="display: flex; justify-content: flex-end"><div style="{{meBubble}}">Kedy príde moja objednávka?</div></div>
+                </div>
+                <div style="{{inputStyle}}">Napíšte správu…</div>
+              </div>
+              <div aria-hidden="true" style="{{launcherStyle}}">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+              <h3 style="margin: 0; font-size: 15px; font-weight: 800">Kód na vloženie do webu</h3>
+              <button type="button" style="height: 40px; padding: 0 14px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; font-size: 13px; cursor: pointer">Kopírovať</button>
+            </div>
+            <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; background: #111827; color: #E5E7EB; border-radius: 10px; padding: 14px; overflow-x: auto; white-space: pre">{{snippet}}</pre>
+            <span style="font-size: 12px; color: #4B5563">Vložte pred koniec značky &lt;/body&gt;. Vzhľad sa načítava zo servera, po zmene netreba kód meniť.</span>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cur: 0,
+      widgets: [
+        { id: 'wdg_8f2a1c', domain: 'vasobchod.sk', color: '#0E7C66', greeting: 'Dobrý deň, ako vám pomôžeme?', pos: 'right', shape: 'circle', theme: 'light', avatars: true, team: 'Prvá línia', lang: 'Slovenčina', chats: '42 chatov dnes' },
+        { id: 'wdg_3d77e0', domain: 'outlet.vasobchod.sk', color: '#C2410C', greeting: 'Hľadáte zľavu? Napíšte nám.', pos: 'right', shape: 'square', theme: 'light', avatars: false, team: 'Prvá línia', lang: 'Slovenčina', chats: '11 chatov dnes' },
+        { id: 'wdg_b19c54', domain: 'b2b.vasobchod.sk', color: '#1D4ED8', greeting: 'Veľkoobchod – váš obchodník je online', pos: 'left', shape: 'square', theme: 'dark', avatars: true, team: 'B2B obchod', lang: 'English', chats: '3 chaty dnes' }
+      ]
+    };
+  }
+  update(patch) {
+    const ws = this.state.widgets.slice();
+    ws[this.state.cur] = { ...ws[this.state.cur], ...patch };
+    this.setState({ widgets: ws });
+  }
+  renderVals() {
+    const w = this.state.widgets[this.state.cur];
+    const dark = w.theme === 'dark';
+    const side = w.pos === 'left' ? 'left: 20px' : 'right: 20px';
+    const seg = (on) => `flex: 1; min-height: 44px; padding: 0 10px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid ${on ? '#111827' : '#D1D5DB'}; background: ${on ? '#111827' : '#FFFFFF'}; color: ${on ? '#FFFFFF' : '#111827'}`;
+    const opt = (key, list) => list.map(([v, label]) => ({ label, pressed: w[key] === v ? 'true' : 'false', pick: () => this.update({ [key]: v }), style: seg(w[key] === v) }));
+    const swatchList = ['#0E7C66', '#1D4ED8', '#C2410C', '#6D28D9', '#BE185D', '#111827'];
+    return {
+      w,
+      tabs: this.state.widgets.map((x, i) => {
+        const on = i === this.state.cur;
+        return { domain: x.domain, meta: `${x.team} · ${x.chats}`, selected: on ? 'true' : 'false', pick: () => this.setState({ cur: i }),
+          dot: `width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto; background: ${x.color}`,
+          style: `display: flex; gap: 10px; align-items: center; min-height: 56px; padding: 8px 16px; border-radius: 12px; cursor: pointer; text-align: left; background: ${on ? '#FFFFFF' : '#F9FAFB'}; border: ${on ? '2px solid #111827' : '1px solid #E5E7EB'}` };
+      }),
+      swatches: swatchList.map((hex) => ({ hex, pressed: w.color.toLowerCase() === hex.toLowerCase() ? 'true' : 'false', pick: () => this.update({ color: hex }),
+        style: `width: 44px; height: 44px; border-radius: 12px; cursor: pointer; background: ${hex}; border: ${w.color.toLowerCase() === hex.toLowerCase() ? '3px solid #111827' : '3px solid #FFFFFF'}; box-shadow: 0 0 0 1px #D1D5DB` })),
+      setColor: (e) => this.update({ color: e.target.value }),
+      setGreeting: (e) => this.update({ greeting: e.target.value }),
+      positions: opt('pos', [['left', 'Vľavo'], ['right', 'Vpravo']]),
+      shapes: opt('shape', [['circle', 'Kruh'], ['square', 'Zaoblený štvorec']]),
+      themes: opt('theme', [['light', 'Svetlá'], ['dark', 'Tmavá']]),
+      avChecked: w.avatars ? 'true' : 'false',
+      toggleAvatars: () => this.update({ avatars: !w.avatars }),
+      avSwitch: `flex: 0 0 auto; width: 48px; height: 28px; border-radius: 999px; border: 0; padding: 3px; cursor: pointer; display: flex; justify-content: ${w.avatars ? 'flex-end' : 'flex-start'}; background: ${w.avatars ? '#0E7C66' : '#9CA3AF'}`,
+      winStyle: `position: absolute; bottom: 92px; ${side}; width: 290px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(17,24,39,0.22); background: ${dark ? '#1F2937' : '#FFFFFF'}; display: flex; flex-direction: column`,
+      headStyle: `background: ${w.color}; color: #FFFFFF; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px`,
+      bodyStyle: `padding: 14px; display: flex; flex-direction: column; gap: 8px; background: ${dark ? '#111827' : '#F9FAFB'}; min-height: 150px`,
+      agentBubble: `align-self: flex-start; max-width: 210px; padding: 9px 12px; border-radius: 12px; font-size: 13px; line-height: 1.4; background: ${dark ? '#374151' : '#FFFFFF'}; color: ${dark ? '#F9FAFB' : '#111827'}; border: 1px solid ${dark ? '#374151' : '#E5E7EB'}`,
+      meBubble: `max-width: 210px; padding: 9px 12px; border-radius: 12px; font-size: 13px; line-height: 1.4; background: ${w.color}; color: #FFFFFF`,
+      inputStyle: `padding: 12px 14px; font-size: 13px; border-top: 1px solid ${dark ? '#374151' : '#E5E7EB'}; color: ${dark ? '#D1D5DB' : '#4B5563'}`,
+      launcherStyle: `position: absolute; bottom: 20px; ${side}; width: 56px; height: 56px; border-radius: ${w.shape === 'circle' ? '50%' : '16px'}; background: ${w.color}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(17,24,39,0.25)`,
+      snippet: `<script src="https://cdn.ozvena.sk/widget.js"\n  data-widget="${w.id}" async></` + `script>`
+    };
+  }
+}
+</script>
+</body>
+</html>

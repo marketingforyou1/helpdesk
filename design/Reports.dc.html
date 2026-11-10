@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – reporty</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0E7C66}a:hover{color:#095C4C}
+button,select{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 940px">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0E7C66"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="Calls.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Automation.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="#" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="Mailboxes.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 28px 20px 48px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em">Prehľad podpory</h1>
+        <div style="font-size: 14px; color: #4B5563">Ukážkové dáta · posledných 7 dní</div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <label style="font-size: 13px; color: #4B5563; display: flex; align-items: center; gap: 6px">Obdobie
+          <select style="font-size: 13px; border: 1px solid #D1D5DB; border-radius: 8px; padding: 0 10px; height: 40px; background: #FFFFFF; color: #111827"><option>Posledných 7 dní</option><option>Tento mesiac</option><option>Vlastné…</option></select>
+        </label>
+        <label style="font-size: 13px; color: #4B5563; display: flex; align-items: center; gap: 6px">Tím
+          <select style="font-size: 13px; border: 1px solid #D1D5DB; border-radius: 8px; padding: 0 10px; height: 40px; background: #FFFFFF; color: #111827"><option>Všetky tímy</option><option>Prvá línia</option><option>Fakturácia</option></select>
+        </label>
+        <button type="button" style="height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid #D1D5DB; background: #FFFFFF; color: #111827; font-weight: 600; font-size: 13px; cursor: pointer">Exportovať CSV</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+      <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-size: 13px; color: #4B5563; font-weight: 600">Nové tikety</div>
+        <div style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em">1 284</div>
+        <div style="font-size: 13px; color: #4B5563">o 6 % viac ako minulý týždeň</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-size: 13px; color: #4B5563; font-weight: 600">Prvá odpoveď (medián)</div>
+        <div style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em">4 min 12 s</div>
+        <div style="font-size: 13px; color: #166534; font-weight: 600">o 38 s rýchlejšie</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-size: 13px; color: #4B5563; font-weight: 600">Dodržané SLA</div>
+        <div style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em">94,2 %</div>
+        <div style="height: 8px; background: #E5E7EB; border-radius: 999px; overflow: hidden"><div style="width: 94%; height: 8px; background: #0E7C66"></div></div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-size: 13px; color: #4B5563; font-weight: 600">Spokojnosť zákazníkov</div>
+        <div style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em">4,7 / 5</div>
+        <div style="font-size: 13px; color: #4B5563">z 412 hodnotení</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap">
+          <h2 style="margin: 0; font-size: 16px; font-weight: 800">Objem konverzácií podľa dňa</h2>
+          <div style="display: flex; gap: 14px; font-size: 12px; color: #374151">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 3px; background: #0E7C66; border-radius: 2px"></span>Prijaté</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 3px; background: #C2410C; border-radius: 2px"></span>Vyriešené</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 640 240" width="100%" height="240" role="img" aria-label="Čiarový graf prijatých a vyriešených konverzácií za 7 dní">
+          <g stroke="#E5E7EB" stroke-width="1">
+            <line x1="40" y1="20" x2="630" y2="20"></line><line x1="40" y1="80" x2="630" y2="80"></line><line x1="40" y1="140" x2="630" y2="140"></line><line x1="40" y1="200" x2="630" y2="200"></line>
+          </g>
+          <g font-size="11" fill="#4B5563" font-family="Manrope, sans-serif">
+            <text x="30" y="24" text-anchor="end">300</text><text x="30" y="84" text-anchor="end">200</text><text x="30" y="144" text-anchor="end">100</text><text x="30" y="204" text-anchor="end">0</text>
+            <text x="60" y="226" text-anchor="middle">Po</text><text x="155" y="226" text-anchor="middle">Ut</text><text x="250" y="226" text-anchor="middle">St</text><text x="345" y="226" text-anchor="middle">Št</text><text x="440" y="226" text-anchor="middle">Pi</text><text x="535" y="226" text-anchor="middle">So</text><text x="620" y="226" text-anchor="middle">Ne</text>
+          </g>
+          <polyline fill="none" stroke="#0E7C66" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="60,62 155,44 250,56 345,38 440,74 535,140 620,152"></polyline>
+          <polyline fill="none" stroke="#C2410C" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="60,80 155,58 250,62 345,52 440,80 535,150 620,158"></polyline>
+        </svg>
+      </section>
+
+      <section style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 16px; font-weight: 800">Podľa kanála</h2>
+        <sc-for list="{{byChannel}}" as="c" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; justify-content: space-between; font-size: 13px"><span style="font-weight: 600">{{c.label}}</span><span style="color: #374151">{{c.value}}</span></div>
+            <div style="height: 10px; background: #F3F4F6; border-radius: 999px; overflow: hidden"><div style="{{c.bar}}"></div></div>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-size: 16px; font-weight: 800">Výkon agentov</h2>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px">
+          <thead>
+            <tr style="text-align: left; color: #4B5563; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em">
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">Agent</th>
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">Vyriešené</th>
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">Prvá odpoveď</th>
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">SLA</th>
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">Hodnotenie</th>
+              <th style="padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-weight: 700">Stav</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{agents}}" as="a" hint-placeholder-count="4">
+              <tr>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6; font-weight: 700">{{a.name}}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6">{{a.solved}}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6">{{a.frt}}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6">{{a.sla}}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6">{{a.csat}}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #F3F4F6"><span style="{{a.stStyle}}">{{a.status}}</span></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":940}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ch = [
+      ['E-mail', 462, '#1D4ED8'], ['Chat', 398, '#0E7C66'], ['Telefón', 176, '#6D28D9'],
+      ['Facebook', 121, '#1E40AF'], ['WhatsApp', 84, '#15803D'], ['Instagram', 43, '#BE185D']
+    ];
+    const max = 462;
+    const stc = { 'Online': ['#166534', '#DCFCE7'], 'Prestávka': ['#92400E', '#FEF3C7'], 'Offline': ['#374151', '#F3F4F6'] };
+    return {
+      byChannel: ch.map(([label, value, color]) => ({ label, value, bar: `width: ${Math.round(value / max * 100)}%; height: 10px; background: ${color}; border-radius: 999px` })),
+      agents: [
+        { name: 'Zuzana K.', solved: 214, frt: '2 min 48 s', sla: '97 %', csat: '4,9', status: 'Online' },
+        { name: 'Michal R.', solved: 188, frt: '3 min 55 s', sla: '95 %', csat: '4,7', status: 'Online' },
+        { name: 'Andrea P.', solved: 161, frt: '5 min 10 s', sla: '91 %', csat: '4,6', status: 'Prestávka' },
+        { name: 'Juraj T.', solved: 97, frt: '6 min 02 s', sla: '88 %', csat: '4,5', status: 'Offline' }
+      ].map((a) => ({ ...a, stStyle: `font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; color: ${stc[a.status][0]}; background: ${stc[a.status][1]}` }))
+    };
+  }
+}
+</script>
+</body>
+</html>

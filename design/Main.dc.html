@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – zdieľaná schránka</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0E7C66}a:hover{color:#095C4C}
+button{font-family:inherit}
+textarea{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 900px; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.01em">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="{{accent}}"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="#" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="Calls.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Automation.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="Reports.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="Mailboxes.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+    <div style="flex: 1 1 200px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; flex-wrap: wrap">
+      <label style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 0 12px; height: 40px; min-width: 220px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hľadať</span>
+        <input type="search" placeholder="Hľadať tikety, zákazníkov…" style="background: transparent; border: 0; outline: none; color: #FFFFFF; font: inherit; font-size: 14px; width: 100%">
+      </label>
+      <button type="button" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: #34D399"></span> Online
+      </button>
+      <div aria-label="Prihlásená agentka: Zuzana" style="width: 36px; height: 36px; border-radius: 50%; background: #FDE68A; color: #78350F; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px">ZK</div>
+    </div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: stretch">
+
+    <aside aria-label="Priečinky" style="flex: 1 1 210px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; padding: 16px 12px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+      <button type="button" style="height: 44px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        Nový tiket
+      </button>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 10px 6px">Zobrazenia</div>
+        <sc-for list="{{views}}" as="v" hint-placeholder-count="5">
+          <button type="button" onClick="{{v.pick}}" style="{{v.style}}">
+            <span>{{v.label}}</span><span style="font-size: 12px; font-weight: 700">{{v.count}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 10px 6px">Kanály</div>
+        <sc-for list="{{channels}}" as="c" hint-placeholder-count="6">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: #374151">
+            <span style="{{c.dot}}"></span>{{c.label}}
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+
+    <section aria-label="Zoznam tiketov" style="flex: 1 1 320px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 16px; border-bottom: 1px solid #E5E7EB">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800">{{viewTitle}}</h1>
+        <label style="font-size: 13px; color: #4B5563; display: flex; align-items: center; gap: 6px">Zoradiť
+          <select style="font: inherit; font-size: 13px; border: 1px solid #D1D5DB; border-radius: 6px; padding: 6px 8px; background: #FFFFFF; color: #111827">
+            <option>Podľa SLA</option><option>Najnovšie</option><option>Priorita</option>
+          </select>
+        </label>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <sc-for list="{{tickets}}" as="t" hint-placeholder-count="6">
+          <button type="button" onClick="{{t.pick}}" style="{{t.rowStyle}}">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%">
+              <span style="font-weight: 700; font-size: 14px; color: #111827">{{t.name}}</span>
+              <span style="font-size: 12px; color: #4B5563">{{t.time}}</span>
+            </div>
+            <div style="font-size: 14px; color: #111827; text-align: left; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.subject}}</div>
+            <div style="font-size: 13px; color: #4B5563; text-align: left; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.preview}}</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center">
+              <span style="{{t.chStyle}}">{{t.channel}}</span>
+              <span style="{{t.statusStyle}}">{{t.status}}</span>
+              <sc-if value="{{t.sla}}" hint-placeholder-val="{{ true }}">
+                <span style="font-size: 12px; font-weight: 700; color: #B45309; display: flex; align-items: center; gap: 4px">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{t.sla}}
+                </span>
+              </sc-if>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <main aria-label="Konverzácia" style="flex: 999 1 480px; min-width: 0; max-width: 100%; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 16px 24px; background: #FFFFFF; border-bottom: 1px solid #E5E7EB">
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <h2 style="margin: 0; font-size: 20px; font-weight: 800">{{sel.subject}}</h2>
+          <div style="font-size: 13px; color: #4B5563">#{{sel.id}} · {{sel.channel}} · vytvorené {{sel.created}}</div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <label style="font-size: 13px; color: #4B5563; display: flex; align-items: center; gap: 6px">Riešiteľ
+            <select style="font: inherit; font-size: 13px; border: 1px solid #D1D5DB; border-radius: 8px; padding: 0 10px; height: 40px; background: #FFFFFF; color: #111827">
+              <option>Zuzana K.</option><option>Michal R.</option><option>Oddelenie fakturácie</option>
+            </select>
+          </label>
+          <button type="button" style="height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid #D1D5DB; background: #FFFFFF; color: #111827; font-weight: 600; font-size: 13px; cursor: pointer">Odložiť</button>
+          <button type="button" style="height: 40px; padding: 0 14px; border-radius: 8px; border: 0; background: #111827; color: #FFFFFF; font-weight: 700; font-size: 13px; cursor: pointer">Vyriešiť</button>
+        </div>
+      </div>
+
+      <div style="flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 16px; min-height: 360px">
+        <sc-for list="{{sel.messages}}" as="m" hint-placeholder-count="3">
+          <div style="{{m.wrap}}">
+            <div style="{{m.bubble}}">
+              <div style="display: flex; gap: 8px; align-items: baseline; justify-content: space-between; margin-bottom: 6px">
+                <span style="font-weight: 700; font-size: 13px">{{m.who}}</span>
+                <span style="font-size: 12px; color: #4B5563">{{m.time}}</span>
+              </div>
+              <div style="font-size: 14px; line-height: 1.55; white-space: pre-line">{{m.text}}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin: 0 24px 24px; background: #FFFFFF; border: 1px solid #D1D5DB; border-radius: 12px; overflow: hidden">
+        <div role="tablist" aria-label="Typ odpovede" style="display: flex; border-bottom: 1px solid #E5E7EB">
+          <button type="button" role="tab" aria-selected="{{replyOn}}" onClick="{{toReply}}" style="{{replyTab}}">Odpoveď zákazníkovi</button>
+          <button type="button" role="tab" aria-selected="{{noteOn}}" onClick="{{toNote}}" style="{{noteTab}}">Interná poznámka</button>
+        </div>
+        <label style="display: block">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Text správy</span>
+          <textarea rows="4" placeholder="{{placeholder}}" style="{{areaStyle}}"></textarea>
+        </label>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 10px 12px; border-top: 1px solid #E5E7EB">
+          <div style="display: flex; gap: 4px">
+            <button type="button" aria-label="Priložiť súbor" style="width: 44px; height: 44px; border: 0; background: transparent; border-radius: 8px; cursor: pointer; color: #374151; display: flex; align-items: center; justify-content: center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 11-8.5 8.5a5 5 0 0 1-7-7L14 4a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L15 7"></path></svg>
+            </button>
+            <button type="button" style="height: 44px; padding: 0 12px; border: 0; background: transparent; border-radius: 8px; cursor: pointer; color: #374151; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"></path></svg>
+              Šablóny odpovedí
+            </button>
+            <button type="button" style="height: 44px; padding: 0 12px; border: 0; background: transparent; border-radius: 8px; cursor: pointer; color: #374151; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2Z"></path><path d="M8 7h6"></path></svg>
+              Článok z bázy
+            </button>
+          </div>
+          <button type="button" style="height: 44px; padding: 0 18px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px">
+            {{sendLabel}}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <aside aria-label="Detail zákazníka" style="flex: 1 1 280px; max-width: 100%; background: #FFFFFF; border-left: 1px solid #E5E7EB; padding: 20px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+      <div style="display: flex; gap: 12px; align-items: center">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: #E0E7FF; color: #3730A3; display: flex; align-items: center; justify-content: center; font-weight: 800">{{sel.initials}}</div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <div style="font-weight: 800; font-size: 16px">{{sel.name}}</div>
+          <div style="font-size: 13px; color: #4B5563">{{sel.company}}</div>
+        </div>
+      </div>
+      <dl style="margin: 0; display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 12px; font-size: 13px">
+        <div><dt style="color: #4B5563; margin-bottom: 2px">E-mail</dt><dd style="margin: 0; font-weight: 600; word-break: break-all">{{sel.email}}</dd></div>
+        <div><dt style="color: #4B5563; margin-bottom: 2px">Telefón</dt><dd style="margin: 0; font-weight: 600">{{sel.phone}}</dd></div>
+        <div><dt style="color: #4B5563; margin-bottom: 2px">Zákazníkom od</dt><dd style="margin: 0; font-weight: 600">{{sel.since}}</dd></div>
+        <div><dt style="color: #4B5563; margin-bottom: 2px">Posledná objednávka</dt><dd style="margin: 0; font-weight: 600">{{sel.order}}</dd></div>
+      </dl>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em">Štítky</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{sel.tags}}" as="tag" hint-placeholder-count="2">
+            <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #F3F4F6; color: #374151">{{tag}}</span>
+          </sc-for>
+          <button type="button" style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: transparent; border: 1px dashed #9CA3AF; color: #374151; cursor: pointer">+ Pridať</button>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em">Predchádzajúce konverzácie</div>
+        <sc-for list="{{sel.history}}" as="h" hint-placeholder-count="2">
+          <div style="display: flex; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 13px">
+            <span style="color: #111827">{{h.subject}}</span><span style="color: #4B5563; white-space: nowrap">{{h.date}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em">Navštívené stránky</div>
+        <div style="font-size: 13px; color: #374151; line-height: 1.7">/kosik<br>/produkty/bezecke-topanky<br>/doprava-a-platba</div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0E7C66","options":["#0E7C66","#1D4ED8","#C2410C","#6D28D9"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 0, view: 'all', mode: 'reply' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#0E7C66';
+    const ch = {
+      'Chat': ['#0E7C66', '#E6F4F0'],
+      'E-mail': ['#1D4ED8', '#E8EEFD'],
+      'Telefón': ['#6D28D9', '#F1EAFE'],
+      'Facebook': ['#1E40AF', '#E5EAF8'],
+      'WhatsApp': ['#15803D', '#E7F6EC'],
+      'Instagram': ['#BE185D', '#FCE7F1']
+    };
+    const st = {
+      'Nové': ['#92400E', '#FEF3C7'],
+      'Otvorené': ['#1E3A8A', '#DBEAFE'],
+      'Čaká na zákazníka': ['#374151', '#F3F4F6'],
+      'Vyriešené': ['#166534', '#DCFCE7']
+    };
+    const pill = (c) => `font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; color: ${c[0]}; background: ${c[1]}`;
+    const data = [
+      { id: '10482', name: 'Jana Kováčová', initials: 'JK', company: 'Súkromná osoba', channel: 'Chat', status: 'Nové', time: '2 min', sla: '12 min', created: 'dnes 9:41',
+        subject: 'Neprišiel mi zľavový kód', preview: 'Dobrý deň, prihlásila som sa na newsletter, ale…',
+        email: 'jana.kovacova@example.sk', phone: '+421 9xx xxx 104', since: 'marec 2024', order: '#58213 · 89,90 €', tags: ['VIP', 'Newsletter'],
+        history: [{ subject: 'Zmena adresy doručenia', date: '12. 8.' }, { subject: 'Otázka k veľkosti', date: '3. 5.' }],
+        messages: [
+          { who: 'Jana Kováčová', time: '9:41', text: 'Dobrý deň, prihlásila som sa na newsletter, ale zľavový kód na 10 % mi stále neprišiel. Skúšala som aj priečinok spam.', me: false },
+          { who: 'Chatbot', time: '9:41', text: 'Ďakujeme, odovzdávam konverzáciu kolegyni. Priemerný čas odpovede je 2 minúty.', me: false, bot: true }
+        ] },
+      { id: '10479', name: 'Martin Horváth', initials: 'MH', company: 'Horváth s.r.o.', channel: 'E-mail', status: 'Otvorené', time: '18 min', sla: '1 h 40 min', created: 'dnes 9:25',
+        subject: 'Faktúra 2026-1043 – nesprávna adresa', preview: 'Na faktúre je uvedená stará adresa sídla firmy…',
+        email: 'fakturacia@horvath-sro.example', phone: '+421 2 xxxx 2210', since: 'január 2022', order: '#58190 · 1 240,00 €', tags: ['Firma', 'Fakturácia'],
+        history: [{ subject: 'Hromadná objednávka', date: '2. 10.' }],
+        messages: [
+          { who: 'Martin Horváth', time: '9:25', text: 'Dobrý deň,\nna faktúre 2026-1043 je uvedená stará adresa sídla. Prosím o vystavenie opravnej faktúry na Hlavnú 12, Bratislava.\n\nĎakujem, M. Horváth', me: false },
+          { who: 'Zuzana K. (interná poznámka)', time: '9:31', text: '@Michal, vieš prosím vystaviť dobropis? Zákazník má aktualizované údaje v CRM.', me: true, note: true }
+        ] },
+      { id: '10475', name: 'Peter Varga', initials: 'PV', company: 'Súkromná osoba', channel: 'Telefón', status: 'Otvorené', time: '1 h', sla: '', created: 'dnes 8:50',
+        subject: 'Spätné volanie – reklamácia', preview: 'Zmeškaný hovor, zákazník žiada spätné volanie',
+        email: 'peter.varga@example.sk', phone: '+421 9xx xxx 377', since: 'jún 2025', order: '#57902 · 45,00 €', tags: ['Reklamácia'],
+        history: [{ subject: 'Reklamácia – podanie', date: '14. 10.' }],
+        messages: [
+          { who: 'Systém', time: '8:50', text: 'Zmeškaný prichádzajúci hovor (0:00). Nahratá hlasová správa: 0:38.', me: false, bot: true },
+          { who: 'Zuzana K.', time: '9:05', text: 'Volala som späť, nedvíha. Skúsim znova o 11:00 a pošlem SMS.', me: true, note: true }
+        ] },
+      { id: '10471', name: 'Lucia Bieliková', initials: 'LB', company: 'Súkromná osoba', channel: 'Facebook', status: 'Otvorené', time: '2 h', sla: '', created: 'dnes 7:58',
+        subject: 'Kedy doručíte objednávku?', preview: 'Objednávala som v piatok a stále nič…',
+        email: 'lucia.b@example.sk', phone: '—', since: 'október 2026', order: '#58101 · 32,50 €', tags: ['Doprava'],
+        history: [],
+        messages: [
+          { who: 'Lucia Bieliková', time: '7:58', text: 'Ahojte, objednávala som v piatok a stále nič. Kedy to príde?', me: false },
+          { who: 'Zuzana K.', time: '8:10', text: 'Dobrý deň, Lucia, zásielka je u kuriéra a doručenie je plánované na zajtra. Sledovať ju môžete tu: [ODKAZ NA SLEDOVANIE]', me: true }
+        ] },
+      { id: '10466', name: 'Tomáš Šimko', initials: 'TŠ', company: 'Súkromná osoba', channel: 'WhatsApp', status: 'Čaká na zákazníka', time: 'včera', sla: '', created: 'včera 16:12',
+        subject: 'Výmena veľkosti topánok', preview: 'Môžem vymeniť 43 za 44?',
+        email: 'tomas.simko@example.sk', phone: '+421 9xx xxx 552', since: 'február 2023', order: '#57988 · 119,00 €', tags: ['Výmena'],
+        history: [{ subject: 'Vrátenie tovaru', date: '20. 1.' }],
+        messages: [
+          { who: 'Tomáš Šimko', time: '16:12', text: 'Dobrý deň, môžem vymeniť topánky veľkosť 43 za 44?', me: false },
+          { who: 'Zuzana K.', time: '16:20', text: 'Samozrejme. Posielam formulár na výmenu – stačí ho vyplniť a zásielku odošleme zdarma.', me: true }
+        ] },
+      { id: '10460', name: 'Eva Nagyová', initials: 'EN', company: 'Súkromná osoba', channel: 'Instagram', status: 'Vyriešené', time: 'včera', sla: '', created: 'včera 11:03',
+        subject: 'Máte tento model aj v zelenej?', preview: 'Videla som váš príspevok…',
+        email: '—', phone: '—', since: 'september 2026', order: '—', tags: ['Predaj'],
+        history: [],
+        messages: [
+          { who: 'Eva Nagyová', time: '11:03', text: 'Videla som váš príspevok, máte tento model aj v zelenej?', me: false },
+          { who: 'Zuzana K.', time: '11:15', text: 'Áno, zelená bude naskladnená budúci týždeň. Môžem vás upozorniť e-mailom?', me: true }
+        ] }
+    ];
+    const viewDefs = [
+      { id: 'all', label: 'Všetky otvorené', count: 6, filter: (t) => true },
+      { id: 'mine', label: 'Moje', count: 4, filter: (t) => t.status !== 'Nové' },
+      { id: 'new', label: 'Nepriradené', count: 1, filter: (t) => t.status === 'Nové' },
+      { id: 'wait', label: 'Čaká na zákazníka', count: 1, filter: (t) => t.status === 'Čaká na zákazníka' },
+      { id: 'done', label: 'Vyriešené', count: 1, filter: (t) => t.status === 'Vyriešené' }
+    ];
+    const curView = viewDefs.find((v) => v.id === this.state.view) || viewDefs[0];
+    const views = viewDefs.map((v) => {
+      const on = v.id === curView.id;
+      return { label: v.label, count: v.count,
+        pick: () => { const first = data.findIndex(v.filter); this.setState({ view: v.id, picked: first < 0 ? 0 : first }); },
+        style: `display: flex; justify-content: space-between; align-items: center; min-height: 40px; padding: 0 10px; border: 0; border-radius: 8px; cursor: pointer; font-size: 14px; text-align: left; font-weight: ${on ? 700 : 500}; color: ${on ? '#111827' : '#374151'}; background: ${on ? '#F3F4F6' : 'transparent'}` };
+    });
+    const tickets = [];
+    data.forEach((t, i) => {
+      if (!curView.filter(t)) return;
+      const on = i === this.state.picked;
+      tickets.push({ ...t,
+        pick: () => this.setState({ picked: i }),
+        chStyle: pill(ch[t.channel]), statusStyle: pill(st[t.status]),
+        rowStyle: `display: flex; flex-direction: column; gap: 6px; align-items: flex-start; padding: 14px 16px; border: 0; border-bottom: 1px solid #E5E7EB; border-left: 3px solid ${on ? accent : 'transparent'}; background: ${on ? '#F0F7F5' : '#FFFFFF'}; cursor: pointer; text-align: left; width: 100%; box-sizing: border-box` });
+    });
+    const s = data[this.state.picked] || data[0];
+    const sel = { ...s, messages: s.messages.map((m) => ({ ...m,
+      wrap: `display: flex; justify-content: ${m.me ? 'flex-end' : 'flex-start'}`,
+      bubble: `max-width: 560px; padding: 12px 14px; border-radius: 12px; box-sizing: border-box; color: #111827; ${m.note ? 'background: #FEF9C3; border: 1px solid #FDE68A' : m.me ? 'background: #E6F4F0; border: 1px solid #C7E6DD' : m.bot ? 'background: #F3F4F6; border: 1px solid #E5E7EB' : 'background: #FFFFFF; border: 1px solid #E5E7EB'}` })) };
+    const note = this.state.mode === 'note';
+    const tab = (on) => `flex: 0 0 auto; min-height: 44px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-size: 13px; font-weight: 700; color: ${on ? '#111827' : '#4B5563'}; border-bottom: 2px solid ${on ? (note ? '#CA8A04' : accent) : 'transparent'}`;
+    return {
+      accent, views, tickets, sel,
+      channels: Object.keys(ch).map((k) => ({ label: k, dot: `width: 10px; height: 10px; border-radius: 3px; background: ${ch[k][0]}` })),
+      viewTitle: curView.label,
+      replyOn: note ? 'false' : 'true', noteOn: note ? 'true' : 'false',
+      toReply: () => this.setState({ mode: 'reply' }), toNote: () => this.setState({ mode: 'note' }),
+      replyTab: tab(!note), noteTab: tab(note),
+      placeholder: note ? 'Poznámku uvidia len kolegovia. Označte niekoho cez @meno…' : `Odpoveď pre ${s.name} (${s.channel})…`,
+      areaStyle: `display: block; width: 100%; box-sizing: border-box; border: 0; outline: none; resize: vertical; padding: 14px; font-size: 14px; line-height: 1.5; color: #111827; background: ${note ? '#FEFCE8' : '#FFFFFF'}`,
+      sendLabel: note ? 'Uložiť poznámku' : 'Odoslať'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – call centrum</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0E7C66}a:hover{color:#095C4C}
+button,textarea{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 900px; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0E7C66"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="#" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="Automation.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Reports.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="Mailboxes.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: stretch">
+
+    <aside aria-label="Front hovorov" style="flex: 1 1 280px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; padding: 20px 16px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box">
+      <h1 style="margin: 0; font-size: 18px; font-weight: 800">Front hovorov</h1>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <div style="background: #F3F4F6; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; font-weight: 800">3</span><span style="font-size: 12px; color: #4B5563">čakajú</span></div>
+        <div style="background: #F3F4F6; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; font-weight: 800">1:42</span><span style="font-size: 12px; color: #4B5563">najdlhšie</span></div>
+        <div style="background: #F3F4F6; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; font-weight: 800">4/6</span><span style="font-size: 12px; color: #4B5563">agentov</span></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{queue}}" as="q" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #E5E7EB; border-radius: 10px">
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-weight: 700; font-size: 14px">{{q.who}}</span>
+              <span style="font-size: 12px; color: #4B5563">{{q.line}}</span>
+            </div>
+            <span style="font-size: 13px; font-weight: 700; color: #B45309">{{q.wait}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em">IVR menu linky 02/xxx xxx 00</div>
+        <div style="font-size: 13px; color: #374151; line-height: 1.8; border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px">
+          1 · Stav objednávky<br>2 · Reklamácie a vrátenie<br>3 · Fakturácia<br>0 · Operátor
+        </div>
+      </div>
+    </aside>
+
+    <main aria-label="Aktuálny hovor" style="flex: 999 1 480px; min-width: 0; max-width: 100%; padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+      <section style="{{cardStyle}}">
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+          <div style="display: flex; gap: 16px; align-items: center">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: #DDD6FE; color: #4C1D95; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px">PV</div>
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <span style="font-size: 13px; font-weight: 700; color: {{statusColor}}">{{statusLabel}}</span>
+              <h2 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.01em">Peter Varga</h2>
+              <span style="font-size: 14px; color: #4B5563">+421 9xx xxx 377 · linka Reklamácie (voľba 2)</span>
+            </div>
+          </div>
+          <div style="font-size: 36px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.02em">{{clock}}</div>
+        </div>
+
+        <sc-if value="{{ringing}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap">
+            <button type="button" onClick="{{answer}}" style="flex: 1 1 200px; height: 56px; border: 0; border-radius: 14px; background: #15803D; color: #FFFFFF; font-size: 16px; font-weight: 800; cursor: pointer">Prijať hovor</button>
+            <button type="button" style="flex: 1 1 200px; height: 56px; border: 1px solid #D1D5DB; border-radius: 14px; background: #FFFFFF; color: #111827; font-size: 16px; font-weight: 700; cursor: pointer">Presmerovať kolegovi</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{active}}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px">
+            <sc-for list="{{controls}}" as="c" hint-placeholder-count="5">
+              <button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">{{c.label}}</button>
+            </sc-for>
+            <button type="button" onClick="{{hangup}}" style="height: 56px; border: 0; border-radius: 14px; background: #B91C1C; color: #FFFFFF; font-size: 14px; font-weight: 800; cursor: pointer">Ukončiť</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ended}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+            <span style="font-size: 14px; color: #374151">Hovor bol uložený do tiketu #10475 vrátane nahrávky.</span>
+            <button type="button" onClick="{{reset}}" style="height: 44px; padding: 0 16px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; cursor: pointer">Ďalší hovor vo fronte</button>
+          </div>
+        </sc-if>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <section style="flex: 2 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+          <label for="callnote" style="font-size: 15px; font-weight: 800">Poznámky k hovoru</label>
+          <textarea id="callnote" rows="6" placeholder="Zapíšte, čo zákazník potrebuje. Poznámka sa uloží do tiketu." style="border: 1px solid #D1D5DB; border-radius: 10px; padding: 12px; font-size: 14px; line-height: 1.5; resize: vertical; color: #111827"></textarea>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #F3F4F6; color: #374151">Reklamácia</span>
+            <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #F3F4F6; color: #374151">Objednávka #57902</span>
+          </div>
+        </section>
+        <section aria-label="Číselník" style="flex: 1 1 240px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 15px; font-weight: 800">Číselník</h3>
+          <div style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; display: flex; align-items: center; padding: 0 12px; font-size: 18px; font-weight: 700; letter-spacing: 0.05em; font-variant-numeric: tabular-nums">{{dialed}}</div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{keys}}" as="k" hint-placeholder-count="12">
+              <button type="button" onClick="{{k.press}}" style="height: 48px; border: 1px solid #E5E7EB; border-radius: 10px; background: #F9FAFB; color: #111827; font-size: 18px; font-weight: 700; cursor: pointer">{{k.label}}</button>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside aria-label="História hovorov" style="flex: 1 1 280px; max-width: 100%; background: #FFFFFF; border-left: 1px solid #E5E7EB; padding: 20px 16px; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box">
+      <h2 style="margin: 0; font-size: 16px; font-weight: 800">Dnešné hovory</h2>
+      <sc-for list="{{history}}" as="h" hint-placeholder-count="5">
+        <div style="display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid #F3F4F6">
+          <span style="{{h.badge}}">{{h.kind}}</span>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 14px; font-weight: 700">{{h.who}}</span>
+            <span style="font-size: 12px; color: #4B5563">{{h.time}} · {{h.dur}}</span>
+          </div>
+          <button type="button" aria-label="Prehrať nahrávku" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: #F3F4F6; color: #111827; cursor: pointer; display: flex; align-items: center; justify-content: center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8Z"></path></svg>
+          </button>
+        </div>
+      </sc-for>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { phase: 'ringing', secs: 0, mute: false, hold: false, rec: true, dialed: '' };
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      if (this.state.phase === 'active' && !this.state.hold) this.setState({ secs: this.state.secs + 1 });
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  renderVals() {
+    const { phase, secs } = this.state;
+    const mm = String(Math.floor(secs / 60)).padStart(2, '0');
+    const ss = String(secs % 60).padStart(2, '0');
+    const ctl = (key, label, onLabel) => {
+      const on = this.state[key];
+      return { label: on && onLabel ? onLabel : label, pressed: on ? 'true' : 'false',
+        toggle: () => this.setState({ [key]: !on }),
+        style: `height: 56px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1px solid ${on ? '#111827' : '#D1D5DB'}; background: ${on ? '#111827' : '#FFFFFF'}; color: ${on ? '#FFFFFF' : '#111827'}` };
+    };
+    const badge = (c) => `width: 36px; height: 36px; flex: 0 0 auto; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: ${c[0]}; background: ${c[1]}`;
+    const kinds = { 'IN': ['#166534', '#DCFCE7'], 'OUT': ['#1E3A8A', '#DBEAFE'], 'ZM': ['#991B1B', '#FEE2E2'] };
+    return {
+      ringing: phase === 'ringing', active: phase === 'active', ended: phase === 'ended',
+      statusLabel: { ringing: 'Prichádzajúci hovor…', active: this.state.hold ? 'Hovor podržaný' : 'Prebieha hovor', ended: 'Hovor ukončený' }[phase],
+      statusColor: phase === 'ringing' ? '#15803D' : phase === 'active' ? '#0B5F4F' : '#4B5563',
+      cardStyle: `background: #FFFFFF; border: 2px solid ${phase === 'ringing' ? '#15803D' : '#E5E7EB'}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 20px`,
+      clock: phase === 'ringing' ? '00:00' : `${mm}:${ss}`,
+      answer: () => this.setState({ phase: 'active', secs: 0 }),
+      hangup: () => this.setState({ phase: 'ended', hold: false }),
+      reset: () => this.setState({ phase: 'ringing', secs: 0 }),
+      controls: [ctl('mute', 'Stlmiť', 'Stlmené'), ctl('hold', 'Podržať', 'Podržané'), ctl('rec', 'Nahrávať', 'Nahráva sa'),
+        { label: 'Presmerovať', pressed: 'false', toggle: () => {}, style: 'height: 56px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1px solid #D1D5DB; background: #FFFFFF; color: #111827' }],
+      dialed: this.state.dialed || ' ',
+      keys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'].map((label) => ({ label, press: () => this.setState({ dialed: (this.state.dialed + label).slice(-14) }) })),
+      queue: [
+        { who: '+421 9xx xxx 218', line: 'Stav objednávky', wait: '1:42' },
+        { who: 'Martin Horváth', line: 'Fakturácia', wait: '0:55' },
+        { who: '+421 2 xxxx 9031', line: 'Operátor', wait: '0:12' }
+      ],
+      history: [
+        { kind: 'IN', who: 'Lucia Bieliková', time: '9:12', dur: '4:31' },
+        { kind: 'OUT', who: 'Peter Varga', time: '9:05', dur: 'nedvíha' },
+        { kind: 'ZM', who: 'Peter Varga', time: '8:50', dur: 'zmeškaný' },
+        { kind: 'IN', who: 'Eva Nagyová', time: '8:31', dur: '2:08' },
+        { kind: 'IN', who: '+421 9xx xxx 640', time: '8:04', dur: '6:47' }
+      ].map((h) => ({ ...h, badge: badge(kinds[h.kind]) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

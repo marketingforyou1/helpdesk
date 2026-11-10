@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – e-mailové schránky</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0B5F4F}a:hover{color:#063F34}
+button,select,input{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 1240px; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0E7C66"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="Calls.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="Automation.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Reports.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="#" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: stretch">
+    <aside aria-label="Nastavenia" style="flex: 1 1 220px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; padding: 20px 12px; display: flex; flex-direction: column; gap: 2px; box-sizing: border-box">
+      <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 10px 8px">Kanály</div>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; background: #F3F4F6; color: #111827; text-decoration: none; font-size: 14px; font-weight: 700">E-mailové schránky</a>
+      <a href="ChatWidgets.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Chat widgety</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Telefónne linky</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Sociálne siete</a>
+      <div style="font-size: 11px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em; padding: 16px 10px 8px">Pracovný postup</div>
+      <a href="Automation.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Automatizačné pravidlá</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Tímy a agenti</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">SLA a pracovná doba</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; color: #374151; text-decoration: none; font-size: 14px; font-weight: 500">Šablóny odpovedí</a>
+    </aside>
+
+    <main style="flex: 999 1 640px; min-width: 0; max-width: 100%; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 24px; box-sizing: border-box">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em">E-mailové schránky</h1>
+          <p style="margin: 0; font-size: 14px; color: #4B5563">Prichádzajúce e-maily prejdú filtrami a podľa pravidiel z nich vzniknú tikety.</p>
+        </div>
+        <button type="button" onClick="{{openConnect}}" style="height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: #0E7C66; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">+ Pripojiť schránku</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
+        <sc-for list="{{boxes}}" as="b" hint-placeholder-count="3">
+          <button type="button" onClick="{{b.pick}}" style="{{b.cardStyle}}">
+            <div style="display: flex; justify-content: space-between; gap: 8px; width: 100%; align-items: center">
+              <span style="font-weight: 800; font-size: 15px; color: #111827; word-break: break-all">{{b.address}}</span>
+              <span style="{{b.statusStyle}}">{{b.status}}</span>
+            </div>
+            <span style="font-size: 13px; color: #4B5563">{{b.provider}} · tím {{b.team}}</span>
+            <span style="font-size: 12px; color: #4B5563">{{b.sync}}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{connectOpen}}" hint-placeholder-val="{{ false }}">
+        <section aria-label="Pripojiť novú schránku" style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+            <h2 style="margin: 0; font-size: 17px; font-weight: 800">Pripojiť novú schránku</h2>
+            <button type="button" onClick="{{closeConnect}}" aria-label="Zavrieť" style="width: 44px; height: 44px; border: 0; background: transparent; border-radius: 10px; cursor: pointer; color: #374151; display: flex; align-items: center; justify-content: center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+            </button>
+          </div>
+          <div role="tablist" aria-label="Spôsob pripojenia" style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{methods}}" as="m" hint-placeholder-count="4">
+              <button type="button" role="tab" aria-selected="{{m.selected}}" onClick="{{m.pick}}" style="{{m.style}}">{{m.label}}</button>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{isOauth}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+              <p style="margin: 0; font-size: 14px; color: #374151; line-height: 1.5">Prihláste sa účtom {{oauthName}} a povoľte prístup. Heslo neukladáme, používame bezpečné prihlásenie OAuth.</p>
+              <button type="button" style="height: 44px; padding: 0 18px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; font-size: 14px; cursor: pointer">Prihlásiť sa cez {{oauthName}}</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{isImap}}" hint-placeholder-val="{{ true }}">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">E-mailová adresa<input type="email" placeholder="podpora@vasobchod.sk" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Heslo / heslo aplikácie<input type="password" placeholder="••••••••" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">IMAP server<input type="text" placeholder="imap.vasobchod.sk" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Port a šifrovanie<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>993 · SSL/TLS</option><option>143 · STARTTLS</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">SMTP server (odosielanie)<input type="text" placeholder="smtp.vasobchod.sk" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Port SMTP<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>465 · SSL/TLS</option><option>587 · STARTTLS</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Kontrolovať novú poštu<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>Okamžite (IMAP IDLE)</option><option>Každú minútu</option><option>Každých 5 minút</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Po stiahnutí<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>Ponechať na serveri</option><option>Označiť ako prečítané</option><option>Zmazať zo servera</option></select></label>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; font-size: 14px; cursor: pointer">Otestovať pripojenie</button>
+              <button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: #111827; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">Uložiť schránku</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{isForward}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <p style="margin: 0; font-size: 14px; color: #374151; line-height: 1.5">Nastavte vo svojej pošte automatické presmerovanie na túto adresu. Odpovede budú odchádzať z vašej pôvodnej adresy.</p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+                <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #F3F4F6; border: 1px solid #E5E7EB; border-radius: 8px; padding: 12px 14px">vasobchod-7f3k2@prijem.ozvena.sk</code>
+                <button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; font-size: 13px; cursor: pointer">Kopírovať</button>
+              </div>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+
+      <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-size: 17px; font-weight: 800">Filtre pre {{box.address}}</h2>
+            <span style="font-size: 13px; color: #4B5563">Kontrolujú sa zhora nadol, použije sa prvý, ktorý sedí.</span>
+          </div>
+          <button type="button" style="height: 40px; padding: 0 14px; border: 1px dashed #9CA3AF; border-radius: 10px; background: transparent; color: #374151; font-weight: 700; font-size: 13px; cursor: pointer">+ Pridať filter</button>
+        </div>
+        <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+          <sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+            <li style="{{f.rowStyle}}">
+              <span style="width: 28px; height: 28px; flex: 0 0 auto; border-radius: 8px; background: #F3F4F6; color: #374151; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{f.n}}</span>
+              <div style="flex: 1 1 260px; min-width: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 14px">
+                <span style="font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; background: #FEF3C7; color: #92400E">AK</span>
+                <span style="font-weight: 600">{{f.cond}}</span>
+                <span style="font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; background: #DCFCE7; color: #166534">POTOM</span>
+                <span style="{{f.actStyle}}">{{f.act}}</span>
+              </div>
+              <button type="button" role="switch" aria-checked="{{f.checked}}" aria-label="Zapnúť filter {{f.n}}" onClick="{{f.toggle}}" style="{{f.switchStyle}}"><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; display: block"></span></button>
+            </li>
+          </sc-for>
+          <li style="display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 12px; border: 1px dashed #D1D5DB; font-size: 14px; color: #374151">
+            <span style="width: 28px; height: 28px; flex: 0 0 auto; border-radius: 8px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">—</span>
+            Všetko ostatné → <strong style="color: #111827">vytvoriť tiket pre tím {{box.team}}</strong>
+          </li>
+        </ol>
+      </section>
+
+      <section aria-label="Test filtrov" style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 17px; font-weight: 800">Otestovať filtre na ukážkovom e-maile</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <sc-for list="{{samples}}" as="s" hint-placeholder-count="5">
+            <button type="button" onClick="{{s.pick}}" style="{{s.style}}">{{s.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px">
+          <div style="flex: 1 1 320px; min-width: 0; border: 1px solid #E5E7EB; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; background: #F9FAFB">
+            <div><span style="color: #4B5563">Od: </span><strong>{{sample.from}}</strong></div>
+            <div><span style="color: #4B5563">Predmet: </span><strong>{{sample.subject}}</strong></div>
+            <div style="color: #374151; line-height: 1.5; margin-top: 4px">{{sample.body}}</div>
+          </div>
+          <div style="{{resultStyle}}">
+            <span style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #374151">Výsledok</span>
+            <span style="font-size: 18px; font-weight: 800; color: #111827">{{result.title}}</span>
+            <span style="font-size: 14px; color: #374151; line-height: 1.5">{{result.detail}}</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Meno odosielateľa v odpovediach<input type="text" value="Zákaznícka podpora [VÁŠ OBCHOD]" style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827"></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Potvrdenie prijatia zákazníkovi<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>Poslať šablónu „Prijali sme váš e-mail“</option><option>Neposielať</option></select></label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #374151">Spájanie odpovedí do tiketu<select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF"><option>Podľa čísla tiketu v predmete a hlavičiek</option><option>Len podľa čísla tiketu</option></select></label>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { box: 0, connect: true, method: 'imap', sample: 0, off: {} };
+  }
+  renderVals() {
+    const boxes = [
+      { address: 'podpora@vasobchod.sk', provider: 'Microsoft 365', team: 'Prvá línia', status: 'Pripojené', sync: 'Synchronizované pred 1 min' },
+      { address: 'fakturacia@vasobchod.sk', provider: 'IMAP / SMTP', team: 'Fakturácia', status: 'Pripojené', sync: 'Synchronizované pred 3 min' },
+      { address: 'reklamacie@vasobchod.sk', provider: 'Presmerovanie', team: 'Reklamácie', status: 'Čaká na overenie', sync: 'Zatiaľ neprišiel žiadny e-mail' }
+    ];
+    const ok = ['#166534', '#DCFCE7'], warn = ['#92400E', '#FEF3C7'];
+    const filtersByBox = [
+      [
+        { cond: 'Predmet obsahuje číslo tiketu [#…]', act: 'Pridať do existujúceho tiketu', kind: 'merge', test: (s) => /\[#\d+\]/.test(s.subject) },
+        { cond: 'Hlavička List-Unsubscribe alebo odosielateľ noreply@', act: 'Nevytvárať tiket · archivovať', kind: 'skip', test: (s) => s.newsletter },
+        { cond: 'Spam skóre vyššie ako 5', act: 'Presunúť do spamu', kind: 'skip', test: (s) => s.spam },
+        { cond: 'Predmet alebo text obsahuje „reklamácia“, „pokazené“', act: 'Tiket → tím Reklamácie · štítok Reklamácia', kind: 'create', test: (s) => /reklam|pokaz/i.test(s.subject + s.body) },
+        { cond: 'Odosielateľ je zákazník so štítkom VIP', act: 'Tiket → priorita Vysoká · SLA 15 min', kind: 'create', test: (s) => s.vip },
+        { cond: 'Text obsahuje „faktúra“, „dobropis“', act: 'Tiket → tím Fakturácia', kind: 'create', test: (s) => /faktúr|dobropis/i.test(s.subject + s.body) }
+      ],
+      [
+        { cond: 'Predmet obsahuje číslo tiketu [#…]', act: 'Pridať do existujúceho tiketu', kind: 'merge', test: (s) => /\[#\d+\]/.test(s.subject) },
+        { cond: 'Príloha je PDF a odosielateľ je dodávateľ', act: 'Tiket → fronta Došlé faktúry', kind: 'create', test: () => false },
+        { cond: 'Hlavička List-Unsubscribe', act: 'Nevytvárať tiket · archivovať', kind: 'skip', test: (s) => s.newsletter }
+      ],
+      [
+        { cond: 'Predmet obsahuje číslo tiketu [#…]', act: 'Pridať do existujúceho tiketu', kind: 'merge', test: (s) => /\[#\d+\]/.test(s.subject) },
+        { cond: 'Text obsahuje číslo objednávky', act: 'Tiket · priradiť objednávku zákazníkovi', kind: 'create', test: (s) => /#5\d{4}/.test(s.body) }
+      ]
+    ];
+    const bi = this.state.box;
+    const box = boxes[bi];
+    const off = this.state.off;
+    const actColor = { merge: ['#1E3A8A', '#DBEAFE'], skip: ['#374151', '#F3F4F6'], create: ['#0B5F4F', '#E6F4F0'] };
+    const samplesData = [
+      { label: 'Reklamácia', from: 'peter.varga@example.sk', subject: 'Pokazený zips na bunde', body: 'Dobrý deň, zips sa pokazil po týždni. Objednávka #57902.' },
+      { label: 'Odpoveď na tiket', from: 'jana.kovacova@example.sk', subject: 'Re: Zľavový kód [#10482]', body: 'Ďakujem, kód už funguje.' },
+      { label: 'Newsletter', from: 'noreply@dodavatel.example', subject: 'Novinky na november', body: 'Pozrite si naše novinky…', newsletter: true },
+      { label: 'VIP zákazník', from: 'fakturacia@horvath-sro.example', subject: 'Otázka k objednávke', body: 'Potrebujeme doplniť 20 kusov.', vip: true },
+      { label: 'Spam', from: 'win@lottery.example', subject: 'Vyhrali ste!!!', body: 'Kliknite sem…', spam: true }
+    ];
+    const sample = samplesData[this.state.sample];
+    const list = filtersByBox[bi];
+    let hit = -1;
+    list.forEach((f, i) => { if (hit < 0 && !off[bi + ':' + i] && f.test(sample)) hit = i; });
+    const filters = list.map((f, i) => {
+      const enabled = !off[bi + ':' + i];
+      const c = actColor[f.kind];
+      return { n: i + 1, cond: f.cond, act: f.act, checked: enabled ? 'true' : 'false',
+        toggle: () => this.setState({ off: { ...off, [bi + ':' + i]: enabled } }),
+        rowStyle: `display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 12px; border-radius: 12px; border: ${i === hit ? '2px solid #0E7C66' : '1px solid #E5E7EB'}; background: ${i === hit ? '#F0F7F5' : '#FFFFFF'}; opacity: ${enabled ? 1 : 0.6}`,
+        actStyle: `font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 8px; color: ${c[0]}; background: ${c[1]}`,
+        switchStyle: `flex: 0 0 auto; width: 48px; height: 28px; border-radius: 999px; border: 0; padding: 3px; cursor: pointer; display: flex; justify-content: ${enabled ? 'flex-end' : 'flex-start'}; background: ${enabled ? '#0E7C66' : '#9CA3AF'}` };
+    });
+    const result = hit >= 0
+      ? { title: `Filter ${hit + 1}: ${list[hit].act}`, detail: `Zhoda: ${list[hit].cond}.` }
+      : { title: `Nový tiket pre tím ${box.team}`, detail: 'Žiadny filter nesedel, použije sa predvolené pravidlo schránky.' };
+    const methodDefs = [['gmail', 'Gmail / Google Workspace'], ['m365', 'Microsoft 365 / Outlook'], ['imap', 'IMAP / SMTP'], ['fwd', 'Presmerovanie']];
+    const m = this.state.method;
+    return {
+      boxes: boxes.map((b, i) => ({ ...b, pick: () => this.setState({ box: i }),
+        statusStyle: `font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; color: ${(b.status === 'Pripojené' ? ok : warn)[0]}; background: ${(b.status === 'Pripojené' ? ok : warn)[1]}`,
+        cardStyle: `display: flex; flex-direction: column; gap: 6px; align-items: flex-start; text-align: left; padding: 16px; border-radius: 14px; cursor: pointer; background: ${i === bi ? '#F0F7F5' : '#FFFFFF'}; border: ${i === bi ? '2px solid #0E7C66' : '1px solid #E5E7EB'}` })),
+      box, filters, result,
+      connectOpen: this.state.connect,
+      openConnect: () => this.setState({ connect: true }), closeConnect: () => this.setState({ connect: false }),
+      methods: methodDefs.map(([id, label]) => ({ label, selected: id === m ? 'true' : 'false', pick: () => this.setState({ method: id }),
+        style: `min-height: 44px; padding: 0 14px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1px solid ${id === m ? '#111827' : '#D1D5DB'}; background: ${id === m ? '#111827' : '#FFFFFF'}; color: ${id === m ? '#FFFFFF' : '#111827'}` })),
+      isOauth: m === 'gmail' || m === 'm365', isImap: m === 'imap', isForward: m === 'fwd',
+      oauthName: m === 'gmail' ? 'Google' : 'Microsoft',
+      sample,
+      samples: samplesData.map((s, i) => ({ label: s.label, pick: () => this.setState({ sample: i }),
+        style: `min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid ${i === this.state.sample ? '#0E7C66' : '#D1D5DB'}; background: ${i === this.state.sample ? '#E6F4F0' : '#FFFFFF'}; color: ${i === this.state.sample ? '#0B5F4F' : '#374151'}` })),
+      resultStyle: 'flex: 1 1 280px; min-width: 0; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; background: #F0F7F5; border: 1px solid #C7E6DD'
+    };
+  }
+}
+</script>
+</body>
+</html>

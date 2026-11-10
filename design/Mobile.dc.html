@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – mobilná aplikácia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E7C66}a:hover{color:#095C4C}
+button,input{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F6F8; font-family: Manrope, system-ui, sans-serif; color: #111827; display: flex; flex-direction: column; overflow: hidden">
+
+  <sc-if value="{{isList}}" hint-placeholder-val="{{ true }}">
+    <div style="flex: 1; min-height: 0; display: flex; flex-direction: column">
+      <div style="background: #FFFFFF; padding: 20px 16px 12px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid #E5E7EB">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <h1 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.02em">Tikety</h1>
+          <button type="button" aria-label="Nový tiket" style="width: 44px; height: 44px; border-radius: 12px; border: 0; background: {{accent}}; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; background: #F3F4F6; border-radius: 10px; padding: 0 12px; height: 44px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4B5563" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hľadať</span>
+          <input type="search" placeholder="Hľadať" style="border: 0; background: transparent; outline: none; font-size: 15px; width: 100%; color: #111827">
+        </label>
+        <div role="tablist" aria-label="Filter" style="display: flex; gap: 6px">
+          <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3">
+            <button type="button" role="tab" onClick="{{tb.pick}}" style="{{tb.style}}">{{tb.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="flex: 1; min-height: 0; overflow-y: auto">
+        <sc-for list="{{tickets}}" as="t" hint-placeholder-count="5">
+          <button type="button" onClick="{{t.open}}" style="display: flex; gap: 12px; width: 100%; padding: 14px 16px; border: 0; border-bottom: 1px solid #E5E7EB; background: #FFFFFF; text-align: left; cursor: pointer; box-sizing: border-box">
+            <div style="{{t.avatar}}">{{t.initials}}</div>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+              <div style="display: flex; justify-content: space-between; gap: 8px">
+                <span style="font-weight: 700; font-size: 15px; color: #111827">{{t.name}}</span>
+                <span style="font-size: 12px; color: #4B5563">{{t.time}}</span>
+              </div>
+              <span style="font-size: 14px; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.subject}}</span>
+              <div style="display: flex; gap: 6px; align-items: center">
+                <span style="{{t.chStyle}}">{{t.channel}}</span>
+                <sc-if value="{{t.sla}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 700; color: #B45309">SLA {{t.sla}}</span></sc-if>
+              </div>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isDetail}}" hint-placeholder-val="{{ false }}">
+    <div style="flex: 1; min-height: 0; display: flex; flex-direction: column">
+      <div style="background: #FFFFFF; padding: 12px 8px; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #E5E7EB">
+        <button type="button" onClick="{{back}}" aria-label="Späť na zoznam" style="width: 44px; height: 44px; border: 0; background: transparent; border-radius: 10px; cursor: pointer; color: #111827; display: flex; align-items: center; justify-content: center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+        </button>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+          <span style="font-weight: 800; font-size: 16px">{{sel.name}}</span>
+          <span style="font-size: 12px; color: #4B5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{sel.channel}} · {{sel.subject}}</span>
+        </div>
+        <button type="button" style="height: 40px; padding: 0 12px; border: 0; border-radius: 10px; background: #111827; color: #FFFFFF; font-weight: 700; font-size: 13px; cursor: pointer">Vyriešiť</button>
+      </div>
+      <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{sel.messages}}" as="m" hint-placeholder-count="2">
+          <div style="{{m.wrap}}"><div style="{{m.bubble}}">{{m.text}}</div></div>
+        </sc-for>
+      </div>
+      <div style="background: #FFFFFF; border-top: 1px solid #E5E7EB; padding: 8px 8px 8px 14px; display: flex; gap: 6px; align-items: center">
+        <label style="flex: 1">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Odpoveď</span>
+          <input type="text" placeholder="Napíšte odpoveď…" style="width: 100%; box-sizing: border-box; border: 0; outline: none; font-size: 15px; height: 44px; background: transparent; color: #111827">
+        </label>
+        <button type="button" aria-label="Odoslať" style="width: 44px; height: 44px; border: 0; border-radius: 12px; background: {{accent}}; color: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </sc-if>
+
+  <nav aria-label="Spodná navigácia" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E5E7EB; padding: 6px 4px 18px">
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 48px; justify-content: center; text-decoration: none; color: #0B5F4F; font-size: 11px; font-weight: 700">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6Z"></path></svg>Tikety
+    </a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 48px; justify-content: center; text-decoration: none; color: #4B5563; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Chaty
+    </a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 48px; justify-content: center; text-decoration: none; color: #4B5563; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg>Hovory
+    </a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 48px; justify-content: center; text-decoration: none; color: #4B5563; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Profil
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0E7C66","options":["#0E7C66","#1D4ED8","#C2410C","#6D28D9"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: -1, tab: 'mine' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#0E7C66';
+    const ch = { 'Chat': ['#0E7C66', '#E6F4F0'], 'E-mail': ['#1D4ED8', '#E8EEFD'], 'Telefón': ['#6D28D9', '#F1EAFE'], 'Facebook': ['#1E40AF', '#E5EAF8'], 'WhatsApp': ['#15803D', '#E7F6EC'] };
+    const data = [
+      { name: 'Jana Kováčová', initials: 'JK', channel: 'Chat', time: '2 min', sla: '12 min', subject: 'Neprišiel mi zľavový kód', mine: false, bg: '#FDE68A', fg: '#78350F',
+        messages: [{ me: false, text: 'Dobrý deň, zľavový kód na 10 % mi stále neprišiel.' }] },
+      { name: 'Martin Horváth', initials: 'MH', channel: 'E-mail', time: '18 min', sla: '1 h 40 min', subject: 'Faktúra 2026-1043 – nesprávna adresa', mine: true, bg: '#BFDBFE', fg: '#1E3A8A',
+        messages: [{ me: false, text: 'Na faktúre je stará adresa sídla. Prosím o opravnú faktúru.' }, { me: true, text: 'Dobrý deň, opravnú faktúru vystavíme ešte dnes.' }] },
+      { name: 'Peter Varga', initials: 'PV', channel: 'Telefón', time: '1 h', sla: '', subject: 'Spätné volanie – reklamácia', mine: true, bg: '#DDD6FE', fg: '#4C1D95',
+        messages: [{ me: false, text: 'Zmeškaný hovor, hlasová správa 0:38.' }] },
+      { name: 'Lucia Bieliková', initials: 'LB', channel: 'Facebook', time: '2 h', sla: '', subject: 'Kedy doručíte objednávku?', mine: true, bg: '#FBCFE8', fg: '#831843',
+        messages: [{ me: false, text: 'Objednávala som v piatok a stále nič.' }, { me: true, text: 'Zásielka je u kuriéra, doručenie zajtra.' }] },
+      { name: 'Tomáš Šimko', initials: 'TŠ', channel: 'WhatsApp', time: 'včera', sla: '', subject: 'Výmena veľkosti topánok', mine: true, bg: '#BBF7D0', fg: '#14532D',
+        messages: [{ me: false, text: 'Môžem vymeniť 43 za 44?' }] }
+    ];
+    const tabDefs = [['mine', 'Moje'], ['new', 'Nepriradené'], ['all', 'Všetky']];
+    const tabs = tabDefs.map(([id, label]) => {
+      const on = id === this.state.tab;
+      return { label, pick: () => this.setState({ tab: id }),
+        style: `min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid ${on ? '#111827' : '#D1D5DB'}; background: ${on ? '#111827' : '#FFFFFF'}; color: ${on ? '#FFFFFF' : '#374151'}; font-size: 13px; font-weight: 700; cursor: pointer` };
+    });
+    const filt = { mine: (t) => t.mine, new: (t) => !t.mine, all: () => true }[this.state.tab];
+    const tickets = [];
+    data.forEach((t, i) => {
+      if (!filt(t)) return;
+      const c = ch[t.channel];
+      tickets.push({ ...t, open: () => this.setState({ open: i }),
+        avatar: `width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%; background: ${t.bg}; color: ${t.fg}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px`,
+        chStyle: `font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 6px; color: ${c[0]}; background: ${c[1]}` });
+    });
+    const s = data[this.state.open] || data[0];
+    return {
+      accent, tabs, tickets,
+      isList: this.state.open < 0, isDetail: this.state.open >= 0,
+      back: () => this.setState({ open: -1 }),
+      sel: { ...s, messages: s.messages.map((m) => ({ ...m,
+        wrap: `display: flex; justify-content: ${m.me ? 'flex-end' : 'flex-start'}`,
+        bubble: `max-width: 270px; padding: 10px 13px; font-size: 15px; line-height: 1.45; border-radius: 14px; ${m.me ? `background: ${accent}; color: #FFFFFF` : 'background: #FFFFFF; color: #111827; border: 1px solid #E5E7EB'}` })) }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<title>Ozvena – automatizácia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#0E7C66}a:hover{color:#095C4C}
+button,select,input{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #111827; background: #F5F6F8; min-height: 900px; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; background: #111827; color: #FFFFFF">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#0E7C66"></rect><path d="M8 14a6 6 0 0 1 12 0M11 14a3 3 0 0 1 6 0" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="14" cy="18" r="1.6" fill="#FFFFFF"></circle></svg>
+      Ozvena
+    </div>
+    <nav aria-label="Hlavná navigácia" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Tikety</a>
+      <a href="Chat.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Chaty</a>
+      <a href="Calls.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Hovory</a>
+      <a href="Knowledge.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Báza znalostí</a>
+      <a href="#" style="color: #FFFFFF; background: rgba(255,255,255,0.12); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Automatizácia</a>
+      <a href="Reports.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Reporty</a>
+      <a href="Mailboxes.dc.html" style="color: #D1D5DB; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600">Nastavenia</a>
+    </nav>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: stretch">
+    <aside aria-label="Zoznam pravidiel" style="flex: 1 1 360px; max-width: 100%; background: #FFFFFF; border-right: 1px solid #E5E7EB; padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+        <h1 style="margin: 0; font-size: 20px; font-weight: 800">Pravidlá</h1>
+        <button type="button" style="height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: #0E7C66; color: #FFFFFF; font-weight: 700; font-size: 13px; cursor: pointer">+ Nové pravidlo</button>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #4B5563; line-height: 1.5">Pravidlá sa spúšťajú zhora nadol pri každej udalosti na tikete.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{rules}}" as="r" hint-placeholder-count="6">
+          <div style="{{r.rowStyle}}">
+            <button type="button" onClick="{{r.pick}}" style="flex: 1; min-width: 0; border: 0; background: transparent; text-align: left; cursor: pointer; padding: 0; display: flex; flex-direction: column; gap: 3px; color: #111827">
+              <span style="font-weight: 700; font-size: 14px">{{r.name}}</span>
+              <span style="font-size: 12px; color: #4B5563">{{r.meta}}</span>
+            </button>
+            <button type="button" role="switch" aria-checked="{{r.checked}}" aria-label="Zapnúť pravidlo {{r.name}}" onClick="{{r.toggle}}" style="{{r.switchStyle}}">
+              <span style="{{r.knobStyle}}"></span>
+            </button>
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+
+    <main aria-label="Úprava pravidla" style="flex: 999 1 520px; min-width: 0; max-width: 100%; padding: 24px; display: flex; flex-direction: column; gap: 18px; box-sizing: border-box">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center">
+        <label style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 320px">
+          <span style="font-size: 12px; font-weight: 700; color: #4B5563; text-transform: uppercase; letter-spacing: 0.08em">Názov pravidla</span>
+          <input type="text" value="{{sel.name}}" style="height: 48px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 14px; font-size: 18px; font-weight: 800; color: #111827; background: #FFFFFF">
+        </label>
+        <div style="display: flex; gap: 8px">
+          <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #D1D5DB; border-radius: 10px; background: #FFFFFF; color: #111827; font-weight: 700; font-size: 14px; cursor: pointer">Otestovať</button>
+          <button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: #111827; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer">Uložiť</button>
+        </div>
+      </div>
+
+      <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 6px; background: #DBEAFE; color: #1E3A8A">KEĎ</span><h2 style="margin: 0; font-size: 15px; font-weight: 800">Spúšťač</h2></div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4B5563">Udalosť
+          <select style="height: 44px; border: 1px solid #D1D5DB; border-radius: 10px; padding: 0 12px; font-size: 14px; color: #111827; background: #FFFFFF; max-width: 420px">
+            <option>{{sel.trigger}}</option><option>Tiket bol vytvorený</option><option>Zákazník odpovedal</option><option>Uplynul čas</option><option>Zmeškaný hovor</option>
+          </select>
+        </label>
+      </section>
+
+      <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 6px; background: #FEF3C7; color: #92400E">AK</span><h2 style="margin: 0; font-size: 15px; font-weight: 800">Podmienky (všetky musia platiť)</h2></div>
+        <sc-for list="{{sel.conditions}}" as="c" hint-placeholder-count="2">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+            <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 14px; background: #F9FAFB; min-width: 140px">{{c.field}}</span>
+            <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 14px; background: #F9FAFB">{{c.op}}</span>
+            <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 14px; font-weight: 700; background: #FFFFFF; flex: 1 1 160px">{{c.value}}</span>
+            <button type="button" aria-label="Odstrániť podmienku" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #4B5563; cursor: pointer; display: flex; align-items: center; justify-content: center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+            </button>
+          </div>
+        </sc-for>
+        <button type="button" style="align-self: flex-start; height: 40px; padding: 0 12px; border: 1px dashed #9CA3AF; border-radius: 10px; background: transparent; color: #374151; font-weight: 600; font-size: 13px; cursor: pointer">+ Pridať podmienku</button>
+      </section>
+
+      <section style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 10px"><span style="font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 6px; background: #DCFCE7; color: #166534">POTOM</span><h2 style="margin: 0; font-size: 15px; font-weight: 800">Akcie</h2></div>
+        <sc-for list="{{sel.actions}}" as="a" hint-placeholder-count="2">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+            <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 14px; background: #F9FAFB; min-width: 180px">{{a.action}}</span>
+            <span style="height: 44px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 14px; font-weight: 700; background: #FFFFFF; flex: 1 1 200px">{{a.value}}</span>
+          </div>
+        </sc-for>
+        <button type="button" style="align-self: flex-start; height: 40px; padding: 0 12px; border: 1px dashed #9CA3AF; border-radius: 10px; background: transparent; color: #374151; font-weight: 600; font-size: 13px; cursor: pointer">+ Pridať akciu</button>
+      </section>
+
+      <div style="font-size: 13px; color: #4B5563">{{sel.stats}}</div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 0, on: [true, true, true, false, true, true] };
+  }
+  renderVals() {
+    const defs = [
+      { name: 'VIP zákazníci prednostne', trigger: 'Tiket bol vytvorený', stats: 'Spustené 128× za posledných 7 dní.',
+        conditions: [{ field: 'Štítok zákazníka', op: 'obsahuje', value: 'VIP' }, { field: 'Kanál', op: 'je jeden z', value: 'Chat, E-mail, Telefón' }],
+        actions: [{ action: 'Nastaviť prioritu', value: 'Vysoká' }, { action: 'Priradiť tímu', value: 'Prvá línia – senior' }, { action: 'Nastaviť SLA', value: 'Prvá odpoveď do 15 min' }] },
+      { name: 'Faktúry na oddelenie fakturácie', trigger: 'Tiket bol vytvorený', stats: 'Spustené 64× za posledných 7 dní.',
+        conditions: [{ field: 'Predmet alebo text', op: 'obsahuje', value: 'faktúra, dobropis, platba' }],
+        actions: [{ action: 'Priradiť tímu', value: 'Fakturácia' }, { action: 'Pridať štítok', value: 'Fakturácia' }] },
+      { name: 'Automatická odpoveď mimo pracovnej doby', trigger: 'Tiket bol vytvorený', stats: 'Spustené 211× za posledných 7 dní.',
+        conditions: [{ field: 'Čas', op: 'je mimo', value: 'Po–Pi 8:00–18:00' }],
+        actions: [{ action: 'Poslať odpoveď zo šablóny', value: 'Mimo pracovnej doby' }] },
+      { name: 'Pripomenúť zákazníkovi po 3 dňoch', trigger: 'Uplynul čas', stats: 'Pravidlo je vypnuté.',
+        conditions: [{ field: 'Stav', op: 'je', value: 'Čaká na zákazníka' }, { field: 'Bez odpovede', op: 'dlhšie ako', value: '3 dni' }],
+        actions: [{ action: 'Poslať odpoveď zo šablóny', value: 'Pripomienka' }, { action: 'Po ďalších 4 dňoch', value: 'Uzavrieť tiket' }] },
+      { name: 'Zmeškaný hovor → spätné volanie', trigger: 'Zmeškaný hovor', stats: 'Spustené 19× za posledných 7 dní.',
+        conditions: [{ field: 'Linka', op: 'je', value: 'Reklamácie' }],
+        actions: [{ action: 'Vytvoriť tiket', value: 'Spätné volanie' }, { action: 'Priradiť', value: 'Agent s najmenej tiketmi' }] },
+      { name: 'Žiadosť o hodnotenie po vyriešení', trigger: 'Tiket bol vyriešený', stats: 'Spustené 342× za posledných 7 dní.',
+        conditions: [{ field: 'Kanál', op: 'nie je', value: 'Telefón' }],
+        actions: [{ action: 'Poslať prieskum spokojnosti', value: 'Hodnotenie 1–5 hviezdičiek' }] }
+    ];
+    const on = this.state.on;
+    const rules = defs.map((d, i) => {
+      const sel = i === this.state.picked;
+      const enabled = on[i];
+      return { name: d.name, meta: `${d.trigger} · ${d.actions.length} ${d.actions.length === 1 ? 'akcia' : 'akcie'}`,
+        checked: enabled ? 'true' : 'false',
+        pick: () => this.setState({ picked: i }),
+        toggle: () => { const n = on.slice(); n[i] = !n[i]; this.setState({ on: n }); },
+        rowStyle: `display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 12px; border: 1px solid ${sel ? '#0E7C66' : '#E5E7EB'}; background: ${sel ? '#F0F7F5' : '#FFFFFF'}`,
+        switchStyle: `flex: 0 0 auto; width: 48px; height: 28px; border-radius: 999px; border: 0; padding: 3px; cursor: pointer; display: flex; justify-content: ${enabled ? 'flex-end' : 'flex-start'}; background: ${enabled ? '#0E7C66' : '#9CA3AF'}`,
+        knobStyle: 'width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; display: block' };
+    });
+    return { rules, sel: defs[this.state.picked] };
+  }
+}
+</script>
+</body>
+</html>
