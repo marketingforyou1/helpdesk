@@ -86,7 +86,7 @@ export default async function TicketsPage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="flex flex-1 flex-wrap items-stretch">
-      <aside aria-label="Zobrazenia" className="flex max-w-full flex-[1_1_210px] flex-col gap-5 border-r border-line bg-white px-3 py-4">
+      <aside aria-label="Zobrazenia" className="flex min-w-0 max-w-full flex-[1_1_210px] flex-col gap-5 border-r border-line bg-white px-3 py-4">
         <form action="/tickets" className="flex flex-col gap-2">
           <input type="hidden" name="view" value={viewId} />
           <label>
@@ -110,7 +110,7 @@ export default async function TicketsPage({ searchParams }: { searchParams: Prom
         </nav>
       </aside>
 
-      <section aria-label="Zoznam tiketov" className="flex max-w-full flex-[1_1_320px] flex-col border-r border-line bg-white">
+      <section aria-label="Zoznam tiketov" className="flex min-w-0 max-w-full flex-[1_1_320px] flex-col border-r border-line bg-white">
         <div className="flex items-center justify-between gap-2 border-b border-line p-4">
           <h1 className="text-lg font-extrabold">{views[viewId].label}</h1>
           {q && (
@@ -252,7 +252,7 @@ export default async function TicketsPage({ searchParams }: { searchParams: Prom
             <Composer ticketId={sel.id} customerName={sel.customer.name} channel={channelLabel[sel.channel]} />
           </main>
 
-          <aside aria-label="Detail zákazníka" className="flex max-w-full flex-[1_1_280px] flex-col gap-5 border-l border-line bg-white p-5">
+          <aside aria-label="Detail zákazníka" className="flex min-w-0 max-w-full flex-[1_1_280px] flex-col gap-5 border-l border-line bg-white p-5">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E0E7FF] font-extrabold text-[#3730A3]">
                 {initials(sel.customer.name)}
